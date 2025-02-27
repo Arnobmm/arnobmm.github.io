@@ -1,14 +1,1 @@
-.hidden {
-    display: none;
-}
 
-/* Chatbox Styling */
-#chat-container {
-    width: 100%;
-    max-width: 400px;
-    height: 300px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    overflow-y: scroll;
-    background: #f9f9f9;
-}
