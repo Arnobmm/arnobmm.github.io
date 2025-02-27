@@ -32,3 +32,9 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+/* Style for the normal content area */
+#content {
+    text-align: center;
+    margin-top: 50px;
+}
