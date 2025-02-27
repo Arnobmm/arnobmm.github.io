@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbox</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Chatbox</h2>
 
-    <!-- Chat container -->
-    <div id="chat-container" style="width: 100%; max-width: 400px; height: 300px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; background: #f9f9f9;"></div>
+    <h1>Welcome to My Website</h1>
+    <p>This is a normal website. Click the button below to open the chatbox.</p>
 
-    <!-- Message input box -->
-    <input type="text" id="message-box" placeholder="Type a message..." style="width: 80%; padding: 10px; margin-top: 10px;">
+    <!-- Button to open chat -->
+    <button id="open-chatbox">Open Chatbox</button>
 
-    <!-- Send button -->
-    <button id="send-button" style="padding: 10px; margin-top: 10px;">Send</button>
+    <!-- Chat container (Hidden by default) -->
+    <div id="chat-container" class="hidden">
+        <h2>Chatbox</h2>
 
-    <!-- Clear button -->
-    <button id="clear-button" style="padding: 10px; margin-top: 10px;">Clear Chat</button>
+        <div id="chat-messages"></div>
 
-    <!-- Import JavaScript -->
-    <script type="module" src="./script.js"></script>
+        <input type="text" id="message-box" placeholder="Type a message...">
+        <button id="send-button">Send</button>
+        <button id="clear-button">Clear Chat</button>
+    </div>
+
+    <script type="module" src="script.js"></script>
+
 </body>
 </html>
