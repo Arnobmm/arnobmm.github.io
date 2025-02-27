@@ -18,25 +18,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Select elements
-const chatButton = document.getElementById("chat-button");
-const chatSection = document.getElementById("chat-section");
-const closeChatButton = document.getElementById("close-chat");
+// Select chat container, message input field, and buttons
 const chatContainer = document.getElementById("chat-container");
 const messageBox = document.getElementById("message-box");
 const sendButton = document.getElementById("send-button");
 const clearButton = document.getElementById("clear-button");
+const backButton = document.getElementById("back-button");
+const messagesContainer = document.getElementById("messages");
+const chatButton = document.getElementById("chat-button");
+const content = document.getElementById("content");
 
-// Show the chat section when the chat button is clicked
+// Switch to chat view
 chatButton.addEventListener("click", function() {
-    chatSection.style.display = "block";
-    chatButton.style.display = "none"; // Hide the chat button once chat is opened
+    content.style.display = "none";  // Hide normal content
+    chatContainer.style.display = "block";  // Show chat
 });
 
-// Hide the chat section when the close chat button is clicked
-closeChatButton.addEventListener("click", function() {
-    chatSection.style.display = "none";
-    chatButton.style.display = "block"; // Show the chat button again
+// Switch back to the website
+backButton.addEventListener("click", function() {
+    content.style.display = "block";  // Show normal content
+    chatContainer.style.display = "none";  // Hide chat
 });
 
 // Send message function
@@ -64,10 +65,10 @@ onChildAdded(ref(db, 'messages'), (snapshot) => {
     msgDiv.innerText = msg.text;
 
     // Append the message to the chat container
-    chatContainer.appendChild(msgDiv);
+    messagesContainer.appendChild(msgDiv);
 
     // Scroll to the bottom of the chat container
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 });
 
 // Event listener for the Send button
@@ -90,5 +91,5 @@ clearButton.addEventListener("click", function() {
     remove(messagesRef);
 
     // Clear the chat container in the UI
-    chatContainer.innerHTML = "";
+    messagesContainer.innerHTML = "";
 });
