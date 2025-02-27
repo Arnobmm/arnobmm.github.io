@@ -1,14 +1,17 @@
+/* General Styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
     text-align: center;
 }
 
+/* Header Navigation */
 header {
     background: #333;
     color: white;
-    padding: 10px;
+    padding: 20px 0;
 }
 
 nav ul {
@@ -24,43 +27,40 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
+    font-size: 18px;
 }
 
+/* Hero Section */
 .hero {
-    background: #0073e6;
+    background: url('https://source.unsplash.com/1600x900/?technology,code') no-repeat center center/cover;
     color: white;
-    padding: 50px;
+    padding: 100px 20px;
 }
 
-.btn {
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+/* Glowing Button */
+.glow-button {
     display: inline-block;
-    background: #fff;
-    color: #0073e6;
-    padding: 10px 20px;
+    padding: 12px 24px;
+    font-size: 20px;
+    color: white;
+    background-color: #4CAF50;
     text-decoration: none;
     border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.9);
 }
 
-section {
-    padding: 40px;
-}
-
-form input, form textarea {
-    width: 100%;
-    max-width: 400px;
-    margin: 10px 0;
-    padding: 10px;
-    display: block;
-}
-
-button {
-    background: #0073e6;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #005bb5;
-}
+/* Glow effect */
+.glow-button::before {
+    content:
