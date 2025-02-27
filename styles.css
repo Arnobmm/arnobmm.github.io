@@ -63,4 +63,43 @@ nav ul li a {
 
 /* Glow effect */
 .glow-button::before {
-    content:
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #4CAF50, #00FF00, #4CAF50);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.glow-button:hover::before {
+    opacity: 1;
+}
+
+.glow-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 1);
+}
+
+/* About Section */
+.about {
+    padding: 50px;
+    background-color: white;
+}
+
+.about h2 {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background: #222;
+    color: white;
+    padding: 15px;
+    margin-top: 30px;
+}
