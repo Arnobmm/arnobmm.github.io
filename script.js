@@ -18,27 +18,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Select chat container, message input field, and buttons
+// Select chat container, input field, and buttons
 const chatContainer = document.getElementById("chat-container");
 const messageBox = document.getElementById("message-box");
 const sendButton = document.getElementById("send-button");
 const clearButton = document.getElementById("clear-button");
-const backButton = document.getElementById("back-button");
-const messagesContainer = document.getElementById("messages");
-const chatButton = document.getElementById("chat-button");
-const content = document.getElementById("content");
-
-// Switch to chat view
-chatButton.addEventListener("click", function() {
-    content.style.display = "none";  // Hide normal content
-    chatContainer.style.display = "block";  // Show chat
-});
-
-// Switch back to the website
-backButton.addEventListener("click", function() {
-    content.style.display = "block";  // Show normal content
-    chatContainer.style.display = "none";  // Hide chat
-});
 
 // Send message function
 function sendMessage() {
@@ -65,10 +49,10 @@ onChildAdded(ref(db, 'messages'), (snapshot) => {
     msgDiv.innerText = msg.text;
 
     // Append the message to the chat container
-    messagesContainer.appendChild(msgDiv);
+    chatContainer.appendChild(msgDiv);
 
     // Scroll to the bottom of the chat container
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 });
 
 // Event listener for the Send button
@@ -91,5 +75,5 @@ clearButton.addEventListener("click", function() {
     remove(messagesRef);
 
     // Clear the chat container in the UI
-    messagesContainer.innerHTML = "";
+    chatContainer.innerHTML = "";
 });
