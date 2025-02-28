@@ -1,17 +1,17 @@
-/* General Styling */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
     text-align: center;
+    background: #f4f4f4;
 }
 
-/* Header Navigation */
+/* Navigation */
 header {
-    background: #333;
+    background: black;
     color: white;
-    padding: 20px 0;
+    padding: 15px 0;
 }
 
 nav ul {
@@ -27,25 +27,13 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
 }
 
 /* Hero Section */
 .hero {
-    background: url('https://source.unsplash.com/1600x900/?technology,code') no-repeat center center/cover;
+    background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center/cover;
     color: white;
     padding: 100px 20px;
-}
-
-.hero h2 {
-    font-size: 36px;
-    margin-bottom: 10px;
-    color: black; /* Make text black */
-}
-
-.hero p {
-    font-size: 20px;
-    color: black;  /* Set text color to black */
 }
 
 /* Glowing Button */
@@ -61,6 +49,7 @@ nav ul li a {
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 15px rgba(76, 175, 80, 0.9);
+    margin: 10px;
 }
 
 /* Glow effect */
@@ -87,21 +76,30 @@ nav ul li a {
     box-shadow: 0 0 20px rgba(76, 175, 80, 1);
 }
 
-/* About Section */
-.about {
-    padding: 50px;
-    background-color: white;
+/* Portfolio */
+.portfolio-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-.about h2 {
-    font-size: 28px;
-    color: #333;
+.portfolio-item img {
+    width: 200px;
+    border-radius: 10px;
 }
 
-/* Footer */
-footer {
-    background: #222;
+/* Contact Form */
+#contact-form input, #contact-form textarea {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+}
+
+#contact-form button {
+    background: #333;
     color: white;
-    padding: 15px;
-    margin-top: 30px;
+    padding: 10px 20px;
+    border: none;
 }
