@@ -3,42 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Website</title>
+    <title>Modern Web Template</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <header>
-        <h1>My Professional Website</h1>
+        <h1>Brand Name</h1>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h2 style="color: black;">Welcome to My Website</h2>
-        <p style="color: black;">Your one-stop solution for modern web development.</p>
+        <h2>Welcome to Our Creative World</h2>
+        <p>Your one-stop solution for modern web development.</p>
+
         <!-- Glowing Button -->
         <a href="https://arnobmm.github.io/lemon.github.io/index.html" class="glow-button">Go to Chatbox</a>
+
+        <a href="#portfolio" class="btn">Explore</a>
     </section>
 
     <!-- About Section -->
-    <section class="about">
-        <h2>About Me</h2>
-        <p>I am a passionate web developer creating awesome digital experiences.</p>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>We are a creative agency specializing in web design and branding.</p>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 My Professional Website. All rights reserved.</p>
-    </footer>
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h2>Our Work</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="images/work1.jpg" alt="Project 1">
+                <h3>Project One</h3>
+            </div>
+            <div class="portfolio-item">
+                <img src="images/work2.jpg" alt="Project 2">
+                <h3>Project Two</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <p id="response"></p>
+    </section>
 
 </body>
 </html>
