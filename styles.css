@@ -4,7 +4,9 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    background: #f4f4f4;
+    background: black;
+    color: white;
+    font-size: 18px;
 }
 
 /* Navigation */
@@ -12,6 +14,16 @@ header {
     background: black;
     color: white;
     padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 10px 0 30px 0;
+}
+
+nav {
+    margin-bottom: 15px;
 }
 
 nav ul {
@@ -21,12 +33,49 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
+    background-color: transparent;
+    padding: 15px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+nav ul li a::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 255, 0, 0.1), rgba(255, 215, 0, 0.2));
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 50px;
+}
+
+nav ul li a:hover {
+    background-color: transparent;
+    color: white;
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 0 30px rgba(255, 255, 0, 0.4);
+    border: 2px solid rgba(255, 255, 0, 0.2);
+}
+
+nav ul li a:hover::before {
+    opacity: 1;
+    filter: blur(20px);
 }
 
 /* Hero Section */
@@ -34,22 +83,81 @@ nav ul li a {
     background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center/cover;
     color: white;
     padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero h2, .hero p {
+    background-image: linear-gradient(
+        90deg,
+        #ff0000,
+        #ffa500,
+        #ffff00,
+        #00ff00,
+        #00ffff,
+        #0000ff,
+        #ff00ff
+    );
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: rainbow 6s linear infinite;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.4rem;
+    margin: 15px 0;
+}
+
+.hero .text-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 25px 40px;
+    border-radius: 15px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.hero .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
 }
 
 /* Glowing Button */
 .glow-button {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 15px 30px;
     font-size: 20px;
-    color: white;
-    background-color: #4CAF50;
+    color: black;
+    background-color: yellow;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 50px;
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.9);
-    margin: 10px;
+    box-shadow: 0 4px 15px rgba(255, 255, 0, 0.3);
+    margin: 15px;
+    border: 2px solid rgba(255, 255, 0, 0.5);
 }
 
 /* Glow effect */
@@ -60,27 +168,68 @@ nav ul li a {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, #4CAF50, #00FF00, #4CAF50);
+    background: linear-gradient(45deg, #ffd700, yellow, #ffd700);
     z-index: -1;
     filter: blur(10px);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    border-radius: 50px;
+}
+
+.glow-button:hover {
+    transform: scale(1.1) translateY(-3px);
+    background-color: #ffd700;
+    box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
+    color: black;
 }
 
 .glow-button:hover::before {
     opacity: 1;
+    filter: blur(20px);
 }
 
-.glow-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(76, 175, 80, 1);
+/* About Section */
+#about {
+    background-color: black;
+    color: white;
+    padding: 50px 20px;
 }
 
-/* Portfolio */
+#about h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+#about p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Portfolio Section */
+#portfolio {
+    background-color: black;
+    color: white;
+    padding: 50px 20px;
+}
+
+#portfolio h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
 .portfolio-grid {
     display: flex;
     justify-content: center;
     gap: 20px;
+    padding: 20px 0;
+}
+
+.portfolio-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .portfolio-item img {
@@ -88,18 +237,78 @@ nav ul li a {
     border-radius: 10px;
 }
 
-/* Contact Form */
+.portfolio-item h3 {
+    color: white;
+    margin-top: 15px;
+    font-size: 1.4rem;
+}
+
+/* Contact Section */
+#contact {
+    background-color: black;
+    color: white;
+    padding: 50px 20px;
+    border: 2px solid rgba(255, 255, 0, 0.4);
+    border-radius: 30px;
+    margin: 20px;
+    box-shadow: 0 4px 15px rgba(255, 255, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+#contact::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, rgba(255, 255, 0, 0.3), rgba(255, 255, 0, 0.2), rgba(255, 255, 0, 0.3));
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 30px;
+}
+
+#contact:hover::before {
+    opacity: 1;
+}
+
+#contact h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
 #contact-form input, #contact-form textarea {
     display: block;
     margin: 10px auto;
-    padding: 10px;
+    padding: 15px;
     width: 80%;
     max-width: 400px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+}
+
+#contact-form input::placeholder, #contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 #contact-form button {
-    background: #333;
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    padding: 10px 20px;
-    border: none;
+    padding: 12px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+#contact-form button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
