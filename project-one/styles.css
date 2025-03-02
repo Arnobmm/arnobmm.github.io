@@ -1,0 +1,528 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Orbitron:wght@400;700;900&family=Quicksand:wght@300;500&display=swap');
+
+:root {
+    --neon-pink: #ff00ff;
+    --neon-blue: #00ffff;
+    --neon-purple: #9d00ff;
+    --neon-green: #00ff66;
+    --dark-bg: #070a15;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Scroll-triggered animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease-out;
+}
+
+.fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Header styles */
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(157, 0, 255, 0.1) 0%, rgba(7, 10, 21, 1) 70%);
+    z-index: -1;
+}
+
+/* Animated grid background */
+.grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(transparent 0%, transparent 98%, rgba(255, 0, 255, 0.2) 98%, rgba(255, 0, 255, 0.2) 100%),
+        linear-gradient(90deg, transparent 0%, transparent 98%, rgba(0, 255, 255, 0.2) 98%, rgba(0, 255, 255, 0.2) 100%);
+    background-size: 40px 40px;
+    z-index: -1;
+    transform: perspective(500px) rotateX(60deg);
+    transform-origin: center 120%;
+    animation: grid-move 20s linear infinite;
+    opacity: 0.35;
+}
+
+@keyframes grid-move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 40px;
+    }
+}
+
+/* Floating particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    animation: float 10s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0);
+    }
+    100% {
+        transform: translateY(-100px) translateX(50px);
+    }
+}
+
+/* Title styles */
+.title-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.neon-text {
+    text-shadow: 
+        0 0 3px rgba(255, 255, 255, 0.6),
+        0 0 6px currentColor,
+        0 0 10px currentColor,
+        0 0 20px currentColor;
+    animation: neon-pulse 3s infinite alternate;
+}
+
+.pink {
+    color: var(--neon-pink);
+}
+
+.blue {
+    color: var(--neon-blue);
+}
+
+.purple {
+    color: var(--neon-purple);
+}
+
+.green {
+    color: var(--neon-green);
+}
+
+@keyframes neon-pulse {
+    0% {
+        text-shadow: 
+            0 0 3px rgba(255, 255, 255, 0.6),
+            0 0 6px currentColor,
+            0 0 10px currentColor,
+            0 0 15px currentColor;
+    }
+    100% {
+        text-shadow: 
+            0 0 3px rgba(255, 255, 255, 0.6),
+            0 0 8px currentColor,
+            0 0 15px currentColor,
+            0 0 25px currentColor;
+    }
+}
+
+.subtitle {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 1.2rem;
+    color: white;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    padding: 20px;
+}
+
+.menu-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.menu-btn span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.menu-btn span::before,
+.menu-btn span::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.menu-btn span::before {
+    transform: translateY(-8px);
+}
+
+.menu-btn span::after {
+    transform: translateY(8px);
+}
+
+.menu-btn.open span {
+    background: transparent;
+}
+
+.menu-btn.open span::before {
+    transform: translateY(0) rotate(45deg);
+}
+
+.menu-btn.open span::after {
+    transform: translateY(0) rotate(-45deg);
+}
+
+/* Add improved styling for menu button when open */
+.menu-btn.open {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 0, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+/* Main content sections */
+section {
+    padding: 100px 10%;
+    position: relative;
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: -10px;
+    left: 0;
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    max-width: 800px;
+}
+
+/* Feature cards */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(255, 0, 255, 0.1),
+        rgba(0, 255, 255, 0.1));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.feature-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
+.feature-card h3.neon-text {
+    text-shadow: 0 0 3px currentColor, 0 0 7px currentColor;
+}
+
+/* Back button */
+.back-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+.back-btn::before {
+    content: '←';
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 99;
+    transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 80px 30px 30px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.menu-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.menu-links li {
+    margin-bottom: 15px;
+}
+
+.menu-links a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    display: block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
+    transition: all 0.5s ease;
+}
+
+.menu-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.menu-links a:hover::before {
+    left: 100%;
+}
+
+.menu-links .neon-text {
+    text-shadow: 0 0 3px currentColor, 0 0 5px currentColor;
+}
+
+/* Contact form styles */
+.contact-form {
+    max-width: 600px;
+    margin: 40px auto 0;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+    transition: width 0.4s ease;
+}
+
+.form-group input:focus ~ .focus-border,
+.form-group textarea:focus ~ .focus-border {
+    width: 100%;
+}
+
+.submit-btn {
+    background: rgba(0, 255, 255, 0.1);
+    color: var(--neon-blue);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    padding: 12px 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.submit-btn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+    
+    .contact-form {
+        padding: 0 20px;
+    }
+} 
