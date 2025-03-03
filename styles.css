@@ -1,702 +1,245 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    background: black;
-    color: white;
-    font-size: 18px;
-}
+// Simple Typing Animation with Rainbow Effect
+const phrases = [
+    { text: "Welcome to My", colorText: "Website!" },
+    { text: "Explore amazing", colorText: "content!" },
+    { text: "Stay tuned for", colorText: "more!" }
+];
 
-/* Navigation */
-header {
-    background: black;
-    color: white;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+// New playful phrases with emojis
+const playfulPhrases = [
+    "Let's get started! 🚀",
+    "Ready to explore some cool ideas? 💡"
+];
 
-header h1 {
-    font-size: 2.5rem;
-    margin: 10px 0 30px 0;
-    transition: all 0.3s ease;
-    cursor: default;
-}
+// Animation state
+let currentPhraseIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+let typingSpeed = 70; // Faster typing 
+let deleteSpeed = 30; // Faster deleting
+let pauseEnd = 1500; // Shorter pause after typing
+let pauseStart = 300; // Shorter pause before new phrase
 
-header h1:hover {
-    text-shadow: 0 0 15px rgba(255, 255, 0, 0.7);
-    letter-spacing: 0.05em;
-    transform: scale(1.05);
-}
+// Animation state for playful typing
+let playfulPhraseIndex = 0;
+let playfulCharIndex = 0;
+let playfulIsDeleting = false;
+let playfulTypingSpeed = 60; // Even faster for the playful text
+let playfulDeleteSpeed = 25; // Faster deletion
+let playfulPauseEnd = 2000; // Longer pause to read the fun messages
+let playfulPauseStart = 500; // Pause before new phrase
 
-nav {
-    margin-bottom: 15px;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    background-color: transparent;
-    padding: 15px 30px;
-    border-radius: 50px;
-    transition: all 0.3s ease-in-out;
-    box-shadow: none;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    font-size: 1.2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-nav ul li a::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 255, 0, 0.1), rgba(255, 215, 0, 0.2));
-    z-index: -1;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 50px;
-}
-
-nav ul li a:hover {
-    background-color: transparent;
-    color: white;
-    transform: scale(1.1) translateY(-3px);
-    box-shadow: 0 0 30px rgba(255, 255, 0, 0.4);
-    border: 2px solid rgba(255, 255, 0, 0.2);
-}
-
-nav ul li a:hover::before {
-    opacity: 1;
-    filter: blur(20px);
-}
-
-/* Add tech font import */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&family=Roboto:wght@400;700&display=swap');
-
-/* Hero Section with anime goodnight GIF background */
-.hero {
-    background: url('https://media1.tenor.com/m/HB6Ku4skoP8AAAAC/anime-goodnight.gif') no-repeat center/cover;
-    position: relative;
-    color: white;
-    padding: 100px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.65); /* Slightly lighter opacity for the new GIF */
-    z-index: 0;
-}
-
-/* Enhanced Typing Animation Styles without box */
-.typing-container {
-    padding: 30px 50px;
-    margin-bottom: 40px;
-    min-height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: containerFadeIn 1s forwards 0.3s;
-}
-
-@keyframes containerFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+function typeEffect() {
+    const typingElement = document.getElementById("typing-text");
+    const currentPhrase = phrases[currentPhraseIndex];
+    const fullText = currentPhrase.text + " " + currentPhrase.colorText;
+    
+    if (!isDeleting && currentCharIndex <= fullText.length) {
+        // Typing
+        // Check if we're at the point where the rainbow part starts
+        if (currentCharIndex <= currentPhrase.text.length) {
+            // Still typing the normal part
+            typingElement.innerHTML = fullText.substring(0, currentCharIndex);
+        } else {
+            // Starting to type the rainbow part
+            const regularPart = currentPhrase.text;
+            const colorfulPart = fullText.substring(currentPhrase.text.length + 1, currentCharIndex);
+            typingElement.innerHTML = regularPart + " <span class='rainbow-text'>" + colorfulPart + "</span>";
+        }
+        
+        currentCharIndex++;
+        setTimeout(typeEffect, typingSpeed);
+    } 
+    else if (!isDeleting && currentCharIndex > fullText.length) {
+        // Pause after typing complete
+        setTimeout(() => {
+            isDeleting = true;
+            typeEffect();
+        }, pauseEnd);
+    } 
+    else if (isDeleting && currentCharIndex > 0) {
+        // Deleting - always use plain text when deleting to avoid flickering
+        typingElement.textContent = fullText.substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+        setTimeout(typeEffect, deleteSpeed);
+    } 
+    else if (isDeleting && currentCharIndex === 0) {
+        // Move to next phrase
+        isDeleting = false;
+        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+        
+        setTimeout(typeEffect, pauseStart);
     }
 }
 
-#typing-text {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-/* Rainbow text effect */
-.rainbow-text {
-    background-image: linear-gradient(
-        90deg,
-        #ff0000,
-        #ffa500,
-        #ffff00,
-        #00ff00,
-        #00ffff,
-        #0000ff,
-        #ff00ff
-    );
-    background-size: 200% auto;
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    animation: rainbow 4s linear infinite;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-}
-
-.cursor {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin-left: 2px;
-    color: #00ffff;
-    animation: blink 0.7s infinite;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-.hero h2, .hero p {
-    background-image: linear-gradient(
-        90deg,
-        #ff0000,
-        #ffa500,
-        #ffff00,
-        #00ff00,
-        #00ffff,
-        #0000ff,
-        #ff00ff
-    );
-    background-size: 200% auto;
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    animation: rainbow 4s linear infinite;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-@keyframes rainbow {
-    0% {
-        background-position: 0% center;
-    }
-    100% {
-        background-position: 200% center;
+// Playful typing effect function
+function playfulTypeEffect() {
+    const typingElement = document.getElementById("playful-typing-text");
+    const currentPhrase = playfulPhrases[playfulPhraseIndex];
+    
+    if (!playfulIsDeleting && playfulCharIndex <= currentPhrase.length) {
+        // Typing
+        typingElement.textContent = currentPhrase.substring(0, playfulCharIndex);
+        playfulCharIndex++;
+        
+        // Random speed variation for natural typing feel
+        const randomSpeed = Math.random() * 40;
+        const finalSpeed = Math.max(playfulTypingSpeed - randomSpeed, 20);
+        
+        setTimeout(playfulTypeEffect, finalSpeed);
+    } 
+    else if (!playfulIsDeleting && playfulCharIndex > currentPhrase.length) {
+        // Pause after typing complete
+        setTimeout(() => {
+            playfulIsDeleting = true;
+            playfulTypeEffect();
+        }, playfulPauseEnd);
+    } 
+    else if (playfulIsDeleting && playfulCharIndex > 0) {
+        // Deleting
+        typingElement.textContent = currentPhrase.substring(0, playfulCharIndex - 1);
+        playfulCharIndex--;
+        setTimeout(playfulTypeEffect, playfulDeleteSpeed);
+    } 
+    else if (playfulIsDeleting && playfulCharIndex === 0) {
+        // Move to next phrase
+        playfulIsDeleting = false;
+        playfulPhraseIndex = (playfulPhraseIndex + 1) % playfulPhrases.length;
+        
+        setTimeout(playfulTypeEffect, playfulPauseStart);
     }
 }
 
-.hero h2 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    font-weight: bold;
+// Add hover effects to portfolio items
+function setupHoverEffects() {
+    // Add hover effects to portfolio items
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    portfolioItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const img = item.querySelector('img');
+            const heading = item.querySelector('h3');
+            
+            // Create a shimmer effect on the image
+            if (img) {
+                img.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                img.classList.add('highlight-on-hover');
+            }
+            
+            // Make the heading more prominent
+            if (heading) {
+                heading.style.transition = 'all 0.4s ease';
+                heading.style.textShadow = '0 0 15px rgba(255, 204, 0, 0.7)';
+            }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            const img = item.querySelector('img');
+            const heading = item.querySelector('h3');
+            
+            if (img) {
+                img.classList.remove('highlight-on-hover');
+            }
+            
+            if (heading) {
+                heading.style.textShadow = '0 0 10px rgba(255, 204, 0, 0.5)';
+            }
+        });
+    });
+    
+    // Add interactive hover to section headings
+    const sectionHeadings = document.querySelectorAll('section h2');
+    sectionHeadings.forEach(heading => {
+        heading.addEventListener('mouseenter', () => {
+            heading.style.transform = 'scale(1.05)';
+        });
+        
+        heading.addEventListener('mouseleave', () => {
+            heading.style.transform = 'scale(1)';
+        });
+    });
 }
 
-.hero p {
-    font-size: 1.4rem;
-    margin: 15px 0;
-}
-
-.hero .text-box {
-    background: transparent;
-    padding: 25px 0;
-    margin-bottom: 35px;
-    position: relative;
-    z-index: 1;
-    transition: all 0.4s ease;
-}
-
-.hero .text-box::before {
-    display: none;
-}
-
-.hero .text-box:hover {
-    transform: translateY(-5px);
-}
-
-.hero .buttons-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-/* Glowing Button */
-.glow-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 20px;
-    color: black;
-    background-color: yellow;
-    text-decoration: none;
-    border-radius: 50px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 15px rgba(255, 255, 0, 0.3);
-    margin: 15px;
-    border: 2px solid rgba(255, 255, 0, 0.5);
-}
-
-/* Glow effect */
-.glow-button::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #ffd700, yellow, #ffd700);
-    z-index: -1;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 50px;
-}
-
-.glow-button:hover {
-    transform: scale(1.1) translateY(-3px);
-    background-color: #ffd700;
-    box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
-    color: black;
-}
-
-.glow-button:hover::before {
-    opacity: 1;
-    filter: blur(20px);
-}
-
-/* About Section */
-#about {
-    background: url('https://media1.tenor.com/m/tWjJ3yo7gjsAAAAd/anime-lake.gif') no-repeat center/cover;
-    color: white;
-    padding: 50px 20px;
-    transition: all 0.5s ease;
-    position: relative;
-}
-
-#about::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 0;
-}
-
-#about h2, #about p {
-    position: relative;
-    z-index: 1;
-}
-
-#about h2 {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-#about h2::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: 0;
-    left: 50%;
-    background: linear-gradient(90deg, #ff0000, #00ffff);
-    transition: all 0.3s ease;
-}
-
-#about h2:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-#about p {
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    transition: all 0.3s ease;
-}
-
-#about p:hover {
-    transform: scale(1.03);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-}
-
-/* Portfolio Section */
-#portfolio {
-    background-color: black;
-    color: white;
-    padding: 50px 20px;
-}
-
-#portfolio h2 {
-    font-size: 2.2rem;
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-#portfolio h2::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: 0;
-    left: 50%;
-    background: linear-gradient(90deg, #ffa500, #0000ff);
-    transition: all 0.3s ease;
-}
-
-#portfolio h2:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-.portfolio-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.portfolio-item {
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-}
-
-.portfolio-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.portfolio-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(0, 0, 255, 0.2));
-    opacity: 0;
-    z-index: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 15px;
-}
-
-.portfolio-item:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-}
-
-.portfolio-item:hover::before {
-    opacity: 1;
-}
-
-.portfolio-item img {
-    width: 200px;
-    border-radius: 10px;
-    transition: all 0.4s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.portfolio-item:hover img {
-    transform: scale(1.08);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.portfolio-item h3 {
-    color: white;
-    margin-top: 15px;
-    font-size: 1.4rem;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease;
-}
-
-.portfolio-item:hover h3 {
-    color: #ffcc00;
-    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
-}
-
-/* Contact Section */
-#contact {
-    background-color: black;
-    color: white;
-    padding: 50px 20px;
-    border: 2px solid rgba(255, 255, 0, 0.4);
-    border-radius: 30px;
-    margin: 20px;
-    box-shadow: 0 4px 15px rgba(255, 255, 0, 0.2);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
-}
-
-#contact::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, rgba(255, 255, 0, 0.3), rgba(255, 255, 0, 0.2), rgba(255, 255, 0, 0.3));
-    z-index: -1;
-    filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    border-radius: 30px;
-}
-
-#contact:hover {
-    border-color: rgba(255, 255, 0, 0.7);
-    box-shadow: 0 8px 25px rgba(255, 255, 0, 0.3);
-}
-
-#contact:hover::before {
-    opacity: 1;
-}
-
-#contact h2 {
-    font-size: 2.2rem;
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px;
-    transition: all 0.3s ease;
-}
-
-#contact h2::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: 0;
-    left: 50%;
-    background: linear-gradient(90deg, #ffff00, #ffffff);
-    transition: all 0.3s ease;
-}
-
-#contact h2:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-#contact-form input, #contact-form textarea {
-    display: block;
-    margin: 10px auto;
-    padding: 15px;
-    width: 80%;
-    max-width: 400px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: white;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-}
-
-#contact-form input:focus, #contact-form textarea:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 0, 0.5);
-    box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
-    outline: none;
-    transform: translateY(-2px);
-}
-
-#contact-form input:hover, #contact-form textarea:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-#contact-form input::placeholder, #contact-form textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
-}
-
-#contact-form input:focus::placeholder, #contact-form textarea:focus::placeholder {
-    opacity: 0.5;
-    transform: translateX(10px);
-}
-
-#contact-form button {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    padding: 12px 30px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-#contact-form button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.2), 
-        transparent);
-    transition: all 0.5s ease;
-}
-
-#contact-form button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-}
-
-#contact-form button:hover::before {
-    left: 100%;
-}
-
-#response {
-    margin-top: 20px;
-    transition: all 0.5s ease;
-    opacity: 0;
-    height: 0;
-}
-
-#response.show {
-    opacity: 1;
-    height: auto;
-    padding: 10px;
-}
-
-/* Playful Typing Effect */
-.playful-typing-container {
-    padding: 30px 20px;
-    margin-top: 30px;
-    min-height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: containerFadeIn 1s forwards 0.3s;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    transition: all 0.4s ease;
-}
-
-.playful-typing-container:hover {
-    transform: scale(1.05);
-}
-
-#playful-typing-text {
-    font-family: 'Quicksand', 'Rajdhani', sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-}
-
-.playful-typing-container:hover #playful-typing-text {
-    letter-spacing: 0.05em;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-}
-
-.playful-cursor {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-left: 2px;
-    color: #ffcc00;
-    text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
-    display: inline-block;
-    animation: cursor-blink 1s infinite;
-}
-
-@keyframes cursor-blink {
-    0%, 100% { 
-        opacity: 1;
+// Start the typing animation when DOM is loaded
+document.addEventListener("DOMContentLoaded", function() {
+    const typingContainer = document.querySelector('.typing-container');
+    typingContainer.classList.add('fade-in');
+    
+    const playfulTypingContainer = document.querySelector('.playful-typing-container');
+    playfulTypingContainer.classList.add('fade-in');
+    
+    // Start typing with a small delay
+    setTimeout(typeEffect, 800);
+    
+    // Start playful typing after a longer delay
+    setTimeout(playfulTypeEffect, 2000);
+    
+    // Add subtle parallax effect to hero section
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            hero.style.backgroundPosition = `${50 + x * 10}% ${50 + y * 10}%`;
+        });
     }
-    50% { 
-        opacity: 0.5;
-    }
-}
+    
+    // Setup hover effects
+    setupHoverEffects();
+    
+    // Enhanced form interaction
+    setupFormInteractions();
+});
 
-/* Import playful font */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
-
-/* Hover animations for parallax elements */
-.parallax-content:hover {
-    filter: brightness(1.2);
-}
-
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Highlight effect */
-@keyframes highlight-pulse {
-    0%, 100% {
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
-    }
-}
-
-.highlight-on-hover:hover {
-    animation: highlight-pulse 1.5s infinite;
-}
-
-/* Remove the entire #latest-stories section */
-#latest-stories {
-    display: none;
+// Enhanced form interactions
+function setupFormInteractions() {
+    const contactForm = document.getElementById('contact-form');
+    const responseElement = document.getElementById('response');
+    const formInputs = contactForm.querySelectorAll('input, textarea');
+    
+    // Add focus/blur effects to form elements
+    formInputs.forEach(input => {
+        // Create label element if it doesn't exist
+        const inputId = input.getAttribute('placeholder').toLowerCase().replace(/\s+/g, '-');
+        input.id = inputId;
+        
+        input.addEventListener('focus', () => {
+            input.classList.add('active');
+        });
+        
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.classList.remove('active');
+            }
+        });
+    });
+    
+    // Enhanced form submission
+    contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        // Animate the button
+        const button = contactForm.querySelector('button');
+        button.innerHTML = "Sending...";
+        button.style.backgroundColor = "rgba(255, 255, 0, 0.3)";
+        
+        // Simulate sending (you would replace this with actual form submission)
+        setTimeout(() => {
+            button.innerHTML = "Message Sent!";
+            button.style.backgroundColor = "rgba(0, 255, 0, 0.3)";
+            
+            // Show response with animation
+            responseElement.innerText = "Thanks for your message! We'll get back to you soon.";
+            responseElement.classList.add('show');
+            
+            // Reset form after delay
+            setTimeout(() => {
+                formInputs.forEach(input => input.value = '');
+                button.innerHTML = "Send";
+                button.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+                
+                // Keep the thank you message visible
+            }, 3000);
+        }, 1500);
+    });
 }
