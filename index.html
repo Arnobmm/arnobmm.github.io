@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Insights</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="scripts.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <h1>Glowing Insights</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="typing-container">
+            <span id="typing-text"></span>
+            <span class="cursor">|</span>
+        </div>
+        <div class="text-box">
+            <h2>Check Out Our Latest Stories</h2>
+            <p>Explore exciting stories, new ideas, and interesting perspectives.</p>
+        </div>
+        <div class="buttons-container">
+            <a href="https://arnobmm.github.io/lemon.github.io/index.html" class="glow-button" target="_blank">Go to Chatbox</a>
+        </div>
+        
+        <!-- New Playful Typing Effect -->
+        <div class="playful-typing-container">
+            <span id="playful-typing-text"></span>
+            <span class="playful-cursor">|</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a creative web developer who specializing in web design and branding.</p>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="parallax-section">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <a href="project-one/index.html" class="portfolio-link">
+                    <img src="https://images.stockcake.com/public/c/6/0/c607b218-e444-42e3-bbf5-b9aa74d149d4_large/sunset-mountain-highway-stockcake.jpg" alt="Sunset Mountain Highway">
+                    <h3>Project One</h3>
+                </a>
+            </div>
+            <div class="portfolio-item">
+                <a href="project-two/index.html" class="portfolio-link">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/043/410/047/small_2x/car-traffic-light-at-night-city-photo.jpg" alt="Night City Traffic Light">
+                    <h3>Project Two</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <p id="response"></p>
+    </section>
+
+</body>
+</html>
