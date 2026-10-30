@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --neon-pink: #ff00ff;
+    --neon-blue: #00ffff;
+    --neon-purple: #9d00ff;
+    --neon-green: #00ff66;
+    --dark-bg: #070a15;
+  }
+
+  body {
+    background-color: black;
+    color: white;
+    font-family: 'Rajdhani', 'Quicksand', sans-serif;
+  }
+}
+
+/* Rainbow text effect */
+.rainbow-text {
+  background-image: linear-gradient(
+    90deg,
+    #ff0000,
+    #ffa500,
+    #ffff00,
+    #00ff00,
+    #00ffff,
+    #0000ff,
+    #ff00ff
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: rainbow 4s linear infinite;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Neon glow classes */
+.neon-pink {
+  color: #ff00ff;
+}
+.neon-blue {
+  color: #00ffff;
+}
+.neon-purple {
+  color: #9d00ff;
+}
+.neon-green {
+  color: #00ff66;
+}
+
+.neon-text {
+  text-shadow: 
+    0 0 3px rgba(255, 255, 255, 0.6),
+    0 0 6px currentColor,
+    0 0 10px currentColor,
+    0 0 20px currentColor;
+  animation: neon-pulse 3s infinite alternate;
+}
+
+@keyframes neon-pulse {
+  0% {
+    text-shadow: 
+      0 0 3px rgba(255, 255, 255, 0.6),
+      0 0 6px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  100% {
+    text-shadow: 
+      0 0 3px rgba(255, 255, 255, 0.6),
+      0 0 8px currentColor,
+      0 0 15px currentColor,
+      0 0 25px currentColor;
+  }
+}
+
+/* Cyberpunk 3D Animated Grid */
+.neon-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(transparent 0%, transparent 98%, rgba(255, 0, 255, 0.25) 98%, rgba(255, 0, 255, 0.25) 100%),
+    linear-gradient(90deg, transparent 0%, transparent 98%, rgba(0, 255, 255, 0.25) 98%, rgba(0, 255, 255, 0.25) 100%);
+  background-size: 40px 40px;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: center 120%;
+  animation: grid-move 20s linear infinite;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 40px;
+  }
+}
+
+/* Floating particle keyframe */
+@keyframes floatParticle {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-50px) translateX(40px);
+    opacity: 0;
+  }
+}
+
+.animate-particle {
+  animation: floatParticle linear infinite;
+}
+
+/* Glowing Button */
+.glow-button {
+  display: inline-block;
+  padding: 14px 32px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: black;
+  background-color: #ffff00;
+  text-decoration: none;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 255, 0, 0.4);
+  border: 2px solid rgba(255, 255, 0, 0.6);
+  cursor: pointer;
+}
+
+.glow-button::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ffd700, #ffff00, #ffd700);
+  z-index: -1;
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 50px;
+}
+
+.glow-button:hover {
+  transform: scale(1.08) translateY(-3px);
+  background-color: #ffd700;
+  box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
+  color: black;
+}
+
+.glow-button:hover::before {
+  opacity: 1;
+  filter: blur(20px);
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 0.7s infinite;
+}
+
+/* Highlight pulse */
+@keyframes highlight-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.7);
+  }
+}
+
+.highlight-pulse-hover:hover {
+  animation: highlight-pulse 1.5s infinite;
+}

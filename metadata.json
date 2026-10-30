@@ -1,0 +1,9 @@
+{
+  "name": "Glowing Insights & 3D Lemon Games",
+  "description": "Portfolio of Glowing Insights featuring Neon Dreams cyberpunk interactive experience and 3D Lemon Games maze and parkour games.",
+  "version": "1.0.0",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
