@@ -2,203 +2,117 @@
 
 @layer base {
   :root {
-    --neon-pink: #ff00ff;
-    --neon-blue: #00ffff;
-    --neon-purple: #9d00ff;
-    --neon-green: #00ff66;
-    --dark-bg: #070a15;
+    --bg-main: #090a16;
+    --bg-surface: #0f1124;
+    --bg-surface-elevated: #161933;
+    
+    /* Vibrant Creative Accents */
+    --accent-purple: #8b5cf6;
+    --accent-lime: #a3e635;
+    --accent-coral: #f43f5e;
+    --accent-orange: #f97316;
+    --accent-cyan: #06b6d4;
+    --accent-lemon: #facc15;
+    --accent-lavender: #c084fc;
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #090a16;
+    color: #f8fafc;
   }
 
   body {
-    background-color: black;
-    color: white;
-    font-family: 'Rajdhani', 'Quicksand', sans-serif;
+    background-color: #090a16;
+    color: #f8fafc;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #090a16;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e2447;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3b4580;
   }
 }
 
-/* Rainbow text effect */
-.rainbow-text {
-  background-image: linear-gradient(
-    90deg,
-    #ff0000,
-    #ffa500,
-    #ffff00,
-    #00ff00,
-    #00ffff,
-    #0000ff,
-    #ff00ff
-  );
-  background-size: 200% auto;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: rainbow 4s linear infinite;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+.font-display {
+  font-family: 'Outfit', sans-serif;
 }
 
-@keyframes rainbow {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
 }
 
-/* Neon glow classes */
-.neon-pink {
-  color: #ff00ff;
-}
-.neon-blue {
-  color: #00ffff;
-}
-.neon-purple {
-  color: #9d00ff;
-}
-.neon-green {
-  color: #00ff66;
-}
-
-.neon-text {
-  text-shadow: 
-    0 0 3px rgba(255, 255, 255, 0.6),
-    0 0 6px currentColor,
-    0 0 10px currentColor,
-    0 0 20px currentColor;
-  animation: neon-pulse 3s infinite alternate;
-}
-
-@keyframes neon-pulse {
-  0% {
-    text-shadow: 
-      0 0 3px rgba(255, 255, 255, 0.6),
-      0 0 6px currentColor,
-      0 0 10px currentColor,
-      0 0 15px currentColor;
-  }
-  100% {
-    text-shadow: 
-      0 0 3px rgba(255, 255, 255, 0.6),
-      0 0 8px currentColor,
-      0 0 15px currentColor,
-      0 0 25px currentColor;
-  }
-}
-
-/* Cyberpunk 3D Animated Grid */
-.neon-grid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(transparent 0%, transparent 98%, rgba(255, 0, 255, 0.25) 98%, rgba(255, 0, 255, 0.25) 100%),
-    linear-gradient(90deg, transparent 0%, transparent 98%, rgba(0, 255, 255, 0.25) 98%, rgba(0, 255, 255, 0.25) 100%);
-  background-size: 40px 40px;
-  transform: perspective(500px) rotateX(60deg);
-  transform-origin: center 120%;
-  animation: grid-move 20s linear infinite;
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-@keyframes grid-move {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 40px;
-  }
-}
-
-/* Floating particle keyframe */
-@keyframes floatParticle {
-  0% {
-    transform: translateY(100vh) translateX(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-50px) translateX(40px);
-    opacity: 0;
-  }
-}
-
-.animate-particle {
-  animation: floatParticle linear infinite;
-}
-
-/* Glowing Button */
-.glow-button {
-  display: inline-block;
-  padding: 14px 32px;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: black;
-  background-color: #ffff00;
-  text-decoration: none;
-  border-radius: 50px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 15px rgba(255, 255, 0, 0.4);
-  border: 2px solid rgba(255, 255, 0, 0.6);
-  cursor: pointer;
-}
-
-.glow-button::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #ffd700, #ffff00, #ffd700);
-  z-index: -1;
-  filter: blur(10px);
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 50px;
-}
-
-.glow-button:hover {
-  transform: scale(1.08) translateY(-3px);
-  background-color: #ffd700;
-  box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
-  color: black;
-}
-
-.glow-button:hover::before {
-  opacity: 1;
-  filter: blur(20px);
-}
-
-/* Blinking cursor */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.animate-blink {
-  animation: blink 0.7s infinite;
-}
-
-/* Highlight pulse */
-@keyframes highlight-pulse {
+/* Playful floating bounce animation */
+@keyframes floatGentle {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    box-shadow: 0 0 20px rgba(255, 255, 0, 0.7);
+    transform: translateY(-8px) rotate(1.5deg);
   }
 }
 
-.highlight-pulse-hover:hover {
-  animation: highlight-pulse 1.5s infinite;
+.animate-float {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatGentle 6s ease-in-out infinite 2s;
+}
+
+/* Sticker click squash & stretch animation */
+@keyframes stickerPop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.18) rotate(4deg); }
+  65% { transform: scale(0.92) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.animate-sticker-pop {
+  animation: stickerPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Atmospheric colorful ambient glow */
+.ambient-glow-purple {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, rgba(9, 10, 22, 0) 70%);
+}
+
+.ambient-glow-coral {
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.18) 0%, rgba(9, 10, 22, 0) 70%);
+}
+
+.ambient-glow-lime {
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.15) 0%, rgba(9, 10, 22, 0) 70%);
+}
+
+.ambient-glow-cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(9, 10, 22, 0) 70%);
+}
+
+/* Gradient text accents */
+.gradient-text-electric {
+  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 45%, #a3e635 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-playful {
+  background: linear-gradient(135deg, #a855f7 0%, #f43f5e 50%, #facc15 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
